@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>LCM Wifi Control</title>
+<script type="text/javascript">
+
+var btnLinks = [
+  ['left middle','http://192.168.1.115/cm?cmnd=Power%20'],
+  ['left front','http://192.168.1.116/cm?cmnd=Power%20'],
+  ['right middle','http://192.168.1.117/cm?cmnd=Power%20'],
+  ['right front','http://192.168.1.118/cm?cmnd=Power%20'],
+  ['back left','http://192.168.1.119/cm?cmnd=Power%20'],
+  ['back right','http://192.168.1.120/cm?cmnd=Power%20'],
+  ['floodlights','http://192.168.1.121/cm?cmnd=Power%20']	// Note: no comma at end
+];
+
+function ButtonLinks() {
+  var str = '';
+  for (var i=0; i<btnLinks.length; i++) {
+    str += '<h2>' + btnLinks[i][0];
+	str += '</h2>';
+    str += '<button onclick="httpGet(\'' + btnLinks[i][1] + 'On\')">';
+	str += 'On</button>';
+    str += '<button onclick="httpGet(\'' + btnLinks[i][1] + 'Off\')">';
+    str += 'Off</button><br>';
+  }
+  return str;
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl , true ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+
+</script>
+</head>
+<body>
+<script type="text/javascript">
+  document.write(ButtonLinks());
+</script>
+</body>
+</html>
